@@ -9,7 +9,7 @@
         body {
             font-family: 'Courier New', monospace;
             color: black;
-            background-color: white;  
+            background-color: white;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -40,6 +40,8 @@
             margin-left: auto;
             margin-right: auto;
             text-align: left;
+            max-height: 300px; /* Limit height for scroll */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         #bouncing-container {
@@ -51,7 +53,7 @@
 
         .bouncing-image {
             position: absolute;
-            width: 100px;
+            width: 500px; /* Increased image size */
             height: auto;
         }
     </style>
@@ -114,45 +116,14 @@
         const cv = document.getElementById('cv');
 
         toggleCv.addEventListener('click', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent link default behavior
             if (cv.style.display === 'none' || cv.style.display === '') {
-                cv.style.display = 'block';
-                toggleCv.innerHTML = '▲';
+                cv.style.display = 'block'; // Show CV
+                toggleCv.innerHTML = '▲';  // Change arrow to up
             } else {
-                cv.style.display = 'none';
-                toggleCv.innerHTML = '▼';
+                cv.style.display = 'none';  // Hide CV
+                toggleCv.innerHTML = '▼';  // Change arrow to down
             }
-        });
-
-        // JavaScript for bouncing images
-        const images = document.querySelectorAll('.bouncing-image');
-
-        images.forEach(img => {
-            let x = Math.random() * window.innerWidth;
-            let y = Math.random() * window.innerHeight;
-            let dx = (Math.random() - 0.5) * 4;
-            let dy = (Math.random() - 0.5) * 4;
-
-            function animate() {
-                x += dx;
-                y += dy;
-
-                if (x <= 0 || x + img.width >= window.innerWidth) {
-                    dx = -dx;
-                }
-                if (y <= 0 || y + img.height >= window.innerHeight) {
-                    dy = -dy;
-                }
-
-                img.style.left = `${x}px`;
-                img.style.top = `${y}px`;
-
-                requestAnimationFrame(animate);
-            }
-
-            img.style.left = `${x}px`;
-            img.style.top = `${y}px`;
-            animate();
         });
     </script>
 </body>
